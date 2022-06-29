@@ -1,0 +1,306 @@
+.pageHeadingContainer{
+    padding-left: 0px !important;
+}
+
+.pageNavSectionHeading{
+    margin-bottom: 15px !important;
+    margin-top: 30px !important;
+}
+
+p.formHelp {
+    margin: 0px;
+    font-weight: 400;
+    opacity: 1;
+    font-size: 13px;
+    margin-top: -15px;
+    transition: .2s opacity ease-out, .2s color ease-out;
+    color : #484848;
+}
+
+select + .formHelp{
+    margin-top: 8px !important;
+}
+
+input[type=text] + .formHelp{
+    margin-top: -15px !important;
+}
+
+.elemHeading {
+    display: block;
+    font-size: 18px;
+    line-height: 33px;
+    font-weight: 400;
+    color: #484848;
+}
+
+.elemSubHeading{
+    color: #a0a3a5;
+    font-size: 11px;
+    font-weight: 400;
+    display: block;
+    position: relative;
+}
+
+.addAnotherBtn{
+    margin-top: 0px;
+    display: block;
+    cursor:pointer;
+}
+
+.closeBtnForAnotherLink{
+    position: absolute;
+    top: 7px;
+    font-size: 22px;
+    right: -12px;
+}
+
+.addAnotherLink label{
+    left:0px !important;
+}
+
+.designGoLiveDateLabel{
+    color: #484848;
+    font-size: 18px;
+    line-height: 33px;
+    font-weight: 400;
+    top: 2px;
+    position: relative;
+}
+
+.fbLinksContainer{
+    margin-top: 35px;
+}
+
+.fbAdsServiceFieldsContainer{
+    display:none;
+}
+
+textarea:focus{
+    border-bottom: 1px solid #3399ff !important;
+    box-shadow: 0 1px 0 0 #3399ff !important;
+}
+
+textarea:focus + label{
+     color:#3399ff !important;
+}
+
+.noPadding{
+    padding:0px !important;
+}
+
+.noMarginBottom{
+    margin-bottom:0px !important;
+}
+
+.errMsg{
+    color: #f44336 !important;
+    margin: 5px auto !important;
+    text-align: left !important;
+    font-size: 12px;
+}
+
+#postingConditions + label.active, #offersAndIncentives + label.active{
+    top: 12px !important;
+}
+
+#postingConditions, #offersAndIncentives{
+    padding: 13px 0px 15px 0px !important;
+    min-height: 16px !important;
+    line-height:18px;
+    height: 18px;
+}
+
+.file-field input.file-path{
+    border-bottom: 1px solid #3399ff !important;
+}
+
+.agencyLogoBtnElem{
+    background-color: #3399ff;
+    height: 34px !important;
+    line-height: 36px !important;
+    margin-top: 8px;
+}
+
+.agencyLogoBtnElem:hover{
+    background-color: #3399ff !important;
+}
+
+.agencyLogoFileElem{
+     border-bottom: 1px solid #3399ff !important;
+     box-shadow:0 1px 0 0 #3399ff !important;
+}
+
+#submitWhiteLabelRequest{
+    margin-top: 20px;
+}
+
+.fieldErrorMsg[data-frmid="yourNameElem"]{
+    top:80px;
+}
+
+.fieldErrorMsg[data-frmid="notificationEmailElem"]{
+    top:118px;
+    display:block !important;
+}
+
+.fieldErrorMsg[data-frmid="yourUserInterfaceSubDomainElem"]{
+    top:90px;
+}
+
+.fieldErrorMsg[data-frmid="yourVDPSubDomainElem"]{
+    top:85px;
+}
+
+.fieldErrorMsg.helper{
+    top: 24px;
+    position: relative;
+}
+
+label[for=createSubDomainARecordsElem]{
+    left:0px !important;
+}
+
+.input-field{
+    margin-top: 0px !important;
+}
+
+.input-field label{ 
+    color :#484848 !important
+} 
+
+textArea.input-field{
+    
+}
+
+.input-field hint{
+    top: -20px;
+    position: relative;
+    font-weight: 400;
+    opacity: 1;
+    font-size: 13px;
+    margin-top: -15px;
+    transition: .2s opacity ease-out, .2s color ease-out;
+    color: #484848;
+}
+
+.smallHr{
+    margin: 0px;
+    margin-top: 1px;
+    margin-bottom: 10px;
+}
+
+.marginBtm45{
+    margin-bottom: 45px;
+}
+
+.starndardLoanTermElemParentContainer, .showPricesElemParentContainer,.fbLinksContainer,.craigsListCampaignSettingsContainer,.postingConditionsContainer,.spanishCheckBoxContainer, .letGoSettingsContainer , .semServiceContainer, .seoServiceContainer, .offerUpServiceContainer{
+    display:none;
+}
+
+.container h1{
+    margin: 0px 0px 5px 0px ;
+}
+
+.input-field.col{
+    padding: 0;
+}
+
+.input-field.col label{
+    left: 0;
+}
+
+input[type="email"] + label::after, input[type="text"] + label::after, input[type=url] + label::after, input[type=tel] + label::after, input[type=number] + label::after,
+input[type="email"]:focus + label::after, input[type="text"]:focus + label::after, input[type=url]:focus + label::after, input[type=tel]:focus + label::after, input[type=number]:focus + label::after{
+    font-size: 13px;
+    color: #484848;
+}
+
+@media screen and (max-width: 680px) {
+ .mediaScreen{
+ 	 margin-top:-2.5rem;
+ }
+}
+
+@media screen and (max-width: 950px) {
+ .monthlyPost{
+ 	 margin-top:-4rem;
+ 	 font-size:10px;
+ }
+   .monthlyPost.active{
+ 	 margin-top:0.1rem;
+ 	 font-size:10px;
+ }
+}
+
+
+
+@media screen and (min-width: 900px)
+and (max-width: 2000px) {
+ .monthlyPost{
+ 	 margin-top:-2rem;
+ 	 font-size:10px;
+ }
+   .monthlyPost.active{
+ 	 margin-top:0.1rem;
+ 	 font-size:10px;
+ }
+}
+
+
+.m_b_40{
+    margin-bottom:40px;
+}
+
+p#modelContent {
+    font-size: 16px;
+}
+
+.displayNone{
+    display:none !important;
+}
+
+.p-2 {
+    padding: .5rem !important;
+}
+
+.plr{
+    padding-left: .8rem !important;
+    padding-right: .8rem !important;
+}
+
+.widget {
+    background: #fff;
+    margin: 0 auto 10px;
+    position: relative;
+    border: 1px solid #e5e5e5;
+}
+
+.widgetHead {
+    /* background: #f8f8f8 url("images/mosaic-pattern.png") repeat; */
+    /* background: #999; */
+    background-image: linear-gradient(to right top, #051937, #002745, #003552, #00445d, #015367);
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    min-height: 10px;
+    line-height: 30px;
+    position: relative;
+    padding: 0 10px 0 0;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 5px;
+    
+}
+
+.signUpSectionHeading{
+    font-size: 22px !important;
+}
+
+.signUpSectionHeading,
+.collapseIcon{
+    padding: 5px !important;
+}
+
+.bottomBtnContainer {
+    display: flex;
+    justify-content: space-between;
+}
