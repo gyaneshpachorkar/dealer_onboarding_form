@@ -20,6 +20,7 @@
 	$craigslistAreas = array();
 	$salesPersonArr = array();
 	$dealerMultiWebSiteUrlsArr = array();
+	$dealerId = 0;
 	
 	if( isset($_GET['cls']) ) {
 
@@ -73,6 +74,7 @@
 		if (empty($buffer)){
 			
 		} else {
+
 			$data = json_decode($buffer,true);
 			
 			if( $data['result']['response'] == "Success" ) {
@@ -147,11 +149,16 @@
 		if (empty($buffer)){
 			
 		} else {
+
 			$data = json_decode($buffer,true);
 			
 			if( $data['result']['response'] == "Success" ) {
 				
 				$agreementResponse = $data['result']['responseData'];
+
+				if( isset($agreementResponse['dealer_id']) && !empty($agreementResponse['dealer_id']) ) {
+					$dealerId = $agreementResponse['dealer_id'];
+				}
 
 				// Contact Name
 				if( isset($agreementResponse['dealership_contact_name']) && !empty($agreementResponse['dealership_contact_name']) ) {
@@ -359,6 +366,7 @@
 		}
 	</style>
     <body>
+		<input type="hidden" value="<?php echo $dealerId; ?>" id="dealerId" />
         <div class="container" id="signUpForm">
 			<div class="row">
                 <div class="col s6 offset-s3 pageHeadingContainer">
@@ -505,9 +513,9 @@
 					</div>
 					<div class="input-field col  crmUNF">
 						
-						<input id="CRME_User_Name" type="text" class="inputField dataInput formElement CRME_User_Name" autocomplete="off" value="<?php echo isset( $agreementResponse['crm_user_name'] ) ? $agreementResponse['crm_user_name'] : '';?>" >
-						  <label for="CRME_User_Name" data-msg="">User Name<span class="require conditionalRequire <?php echo ( isset( $agreementResponse['is_crm_not_used'] ) && $agreementResponse['is_crm_not_used'] == 1 ? "hide" : "" );?>">*</span> </label>
-						<div class="fieldErrorMsg" data-frmid="CRME_User_Name"></div>	
+						<input id="CRM_User_Name" type="text" class="inputField dataInput formElement CRM_User_Name" autocomplete="off" value="<?php echo isset( $agreementResponse['crm_user_name'] ) ? $agreementResponse['crm_user_name'] : '';?>" >
+						  <label for="CRM_User_Name" data-msg="">User Name<span class="require conditionalRequire <?php echo ( isset( $agreementResponse['is_crm_not_used'] ) && $agreementResponse['is_crm_not_used'] == 1 ? "hide" : "" );?>">*</span> </label>
+						<div class="fieldErrorMsg" data-frmid="CRM_User_Name"></div>	
 					</div>
 				
 				</div>
@@ -698,7 +706,7 @@
 			<?php } ?>
 			
 			<?php if( isset($_GET['cls']) ) { ?>
-				<!----------------Craiglist Setup----------------------------------->
+				<!----------------craigslist Setup----------------------------------->
 				<div class="row">
 					<div class="col s6 offset-s3 noPadding widgetHead" data-id="CraigslistInfo">
 						<h1 class="signUpSectionHeading">Craigslist Setup:</h1>
@@ -709,9 +717,9 @@
 				</div>
 				<div class="row collapseBodyCraigslistInfo">               
 					<div class="input-field col s6 offset-s3">
-						<input id="craiglistName" type="text" class="inputField dataInput formElement" data-fid="dealershipName" autocomplete="off" value="<?php echo isset( $agreementResponse['craigslist_contact_name'] ) ? $agreementResponse['craigslist_contact_name'] : '';?>" >
-						<label for="craiglistName" class="" data-msg="to Appear in Ads">Contact Person Name</label>
-						<div class="fieldErrorMsg" data-frmid="craiglistName"></div>
+						<input id="craigslistName" type="text" class="inputField dataInput formElement" data-fid="dealershipName" autocomplete="off" value="<?php echo isset( $agreementResponse['craigslist_contact_name'] ) ? $agreementResponse['craigslist_contact_name'] : '';?>" >
+						<label for="craigslistName" class="" data-msg="to Appear in Ads">Contact Person Name</label>
+						<div class="fieldErrorMsg" data-frmid="craigslistName"></div>
 					</div>
 				</div>
 				<div class="row collapseBodyCraigslistInfo">               

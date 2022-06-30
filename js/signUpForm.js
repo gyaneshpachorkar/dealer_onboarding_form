@@ -18,6 +18,11 @@ pageElement = {}, pageData = {};
         sendRequestForSignUpDealership();
         //window.location.reload;
     });
+
+    pageElement.signUpForm.saveDraftBtn.click(function(){
+        sendRequestForSignUpDealership();
+        //window.location.reload;
+    });
     
     var goLiveDatePicker = pageElement.signUpForm.goLiveDate.pickadate({
          selectMonths: true, // Creates a dropdown to control month
@@ -557,6 +562,7 @@ function initSelectors(){
     
 
         
+    pageElement.signUpForm.saveDraftBtn = $('#saveDraftBtn');
     pageElement.signUpForm.signUpDealershipBttn = $('#signUpDealershipBttn');
     pageElement.signUpForm.letGoSettingsContainer = $('.letGoSettingsContainer');
     pageElement.signUpForm.fbMarketPlaceServiceFieldsContainer = $('.fbMarketPlaceServiceFieldsContainer');
@@ -639,8 +645,17 @@ function initSelectors(){
 function sendRequestForSignUpDealership(){
 
     pageElement.signUpForm.form.find('.fieldErrorMsg').html('').hide();
+
     if(!validateFormData()){
         return false;
+    }
+
+    if( $('#dealerId').val() == '' || $('#dealerId').val() <= 0 ) {
+
+        pageElement.popup.modelContent.html('Something went wrong while submitting form. Please contact customer support.');
+        pageElement.popup.popup.modal('open');
+        return false;
+	    
     }
 
 	dealershipName = $('#dealershipName').val();
@@ -657,6 +672,9 @@ function sendRequestForSignUpDealership(){
 	var param = {
         'title' : 'Dealer Onboarding Form'
     };
+
+    //dealerId
+    param['dealerId'] = $('#dealerId').val();
 	
 	//-----------------Dealership Contact Information---------------------------
 	if(dealershipInfomationName != null){
@@ -724,7 +742,7 @@ function sendRequestForSignUpDealership(){
 	//----------------Lead Routing----------------------------
 	CRMEmail = $('#CRMEmail').val();
     additionalEmailAddress = $('#additionalEmailAddress').val();
-    CRME_User_Name = $('#CRME_User_Name').val();
+    CRM_User_Name = $('#CRM_User_Name').val();
 	
 	if(CRMEmail != null){
 	    if(CRMEmail.length > 0){
@@ -738,9 +756,9 @@ function sendRequestForSignUpDealership(){
 	    }
     }
 	
-	if(CRME_User_Name != null){
-	    if(CRME_User_Name.length > 0){
-	        param['CRME_User_Name'] = [CRME_User_Name];
+	if(CRM_User_Name != null){
+	    if(CRM_User_Name.length > 0){
+	        param['CRM_User_Name'] = [CRM_User_Name];
 	    }
     }
 	var dontuse = "Yes,does not use.";
@@ -813,23 +831,23 @@ function sendRequestForSignUpDealership(){
 
 	//-------------------------Craigslist Setup----------------------------------------
 	
-	craiglistName = $('#craiglistName').val();
+	craigslistName = $('#craigslistName').val();
     craigName = $('#craigName').val();
   
 	
-	if(craiglistName != null){
-	    if(craiglistName.length > 0){
-	        param['Contact-Person-Name'] = [craiglistName];
+	if(craigslistName != null){
+	    if(craigslistName.length > 0){
+	        param['Contact-Person-Name'] = [craigslistName];
 	    }
     }
 	
 	if(craigName != null){
 	    if(craigName.length > 0){
-	        param['craiglist-Ring-for-Leads'] = [craigName];
+	        param['craigslist-Ring-for-Leads'] = [craigName];
 	    }
     }
 	
-	/* var  param['craiglistAreaAndSubArea'] = [];
+	/* var  param['craigslistAreaAndSubArea'] = [];
 	var nextMarket = 1; */
     /* $('.marketDiv').each(function(){
 		var marketName = $('.marketName_'+nextMarket).val();
@@ -844,7 +862,7 @@ function sendRequestForSignUpDealership(){
     }); */
 	
 	/* if(marketNameContainer.length > 0){
-        param['craiglist-Market-Name'] = marketNameContainer;   
+        param['craigslist-Market-Name'] = marketNameContainer;   
     } */
 	
 	var areaDetails = [];
@@ -868,7 +886,7 @@ function sendRequestForSignUpDealership(){
 		
 	}
 	
-	param['craiglist-Market-Name'] = areaDetails;
+	param['craigslist-Market-Name'] = areaDetails;
 	
 	//----------------------facebook---------------------
 	if($('#facebookURL').val() != undefined && $('#facebookURL').val() != ''){
@@ -928,35 +946,33 @@ function sendRequestForSignUpDealership(){
 
     data = {};
     data.fields = param;
-	
-	console.log(data);return;
 
-    // $.post(wsUrl, data, function(res) {
-      // var response = $.parseJSON(res);
+    $.post(wsUrl, data, function(res) {
+      var response = $.parseJSON(res);
 	   
-        // if(response.hasOwnProperty('status')){
+        if(response.hasOwnProperty('status')){
 			
-            // var msgContent;
+            var msgContent;
             
-            // if(response.status == 'error'){
-                // msgContent = '<div class="errMsg">' + response.msg + '</div>';
-            // }
+            if(response.status == 'error'){
+                msgContent = '<div class="errMsg">' + response.msg + '</div>';
+            }
             
-            // if(response.status == 'success'){
-                // msgContent = 'Thankyou. Onboarding Form Submitted Successfully. <br>Stay Tuned. We will get back to you shortly';
-                // resetForm();
-            // }
+            if(response.status == 'success'){
+                msgContent = 'Thankyou. Onboarding Form Submitted Successfully. <br>Stay Tuned. We will get back to you shortly';
+                //resetForm();
+            }
             
-            // pageElement.popup.modelContent.html(msgContent);
-            // pageElement.popup.popup.modal('open');
-        // } 
-    // });
+            pageElement.popup.modelContent.html(msgContent);
+            pageElement.popup.popup.modal('open');
+        } 
+    });
 }
 
 function resetForm(){
     initPageData();
     
-    var elems = ['dealershipInfomationName','dealershipInformationContactPhone','dealershipInformationContactAddress','dealershipInformationWebsiteURL','dealershipName','dealershipContactPhone','billingName','billingContactPhone','billingContactEmail','CRMEmail','CRME_User_Name','additionalEmailAddress','InventoryFeedProvider','adminLeadName','LeadContactEmail','LeadContactPhone','Salesperson','LeadEmail','leadMobileNumber','craiglistName','craigName','marketName','subMarket','monthlyBudget','facebookURL','supportProviderName','supportProviderTelephone','supportProviderEmail','hostingProviderWebsiteURL_1','dealerWebsiteURL_1','dealershipContactEmail'];
+    var elems = ['dealershipInfomationName','dealershipInformationContactPhone','dealershipInformationContactAddress','dealershipInformationWebsiteURL','dealershipName','dealershipContactPhone','billingName','billingContactPhone','billingContactEmail','CRMEmail','CRM_User_Name','additionalEmailAddress','InventoryFeedProvider','adminLeadName','LeadContactEmail','LeadContactPhone','Salesperson','LeadEmail','leadMobileNumber','craigslistName','craigName','marketName','subMarket','monthlyBudget','facebookURL','supportProviderName','supportProviderTelephone','supportProviderEmail','hostingProviderWebsiteURL_1','dealerWebsiteURL_1','dealershipContactEmail'];
  
     for(var elem in elems){
         clearFormField($('#' + elems[elem]));
@@ -1041,8 +1057,8 @@ function validateFormData(){
 			isValFailed = true;
 			}
 			
-			if($('#CRME_User_Name').val().length == 0){
-				errField.filter('[data-frmid="CRME_User_Name"]').show().html('Information required to continue');
+			if($('#CRM_User_Name').val().length == 0){
+				errField.filter('[data-frmid="CRM_User_Name"]').show().html('Information required to continue');
 			isValFailed = true;
 			}
 		}
