@@ -114,7 +114,6 @@
 			// Base url local
 			$service_url = "http://localhost/dwigtpl/webservices/services/getAgreementDetail";
 		}
-				
 		
 		// Add API params
 		$params['key'] = $access_key;
@@ -156,8 +155,8 @@
 				
 				$agreementResponse = $data['result']['responseData'];
 
-				if( isset($agreementResponse['dealer_id']) && !empty($agreementResponse['dealer_id']) ) {
-					$dealerId = $agreementResponse['dealer_id'];
+				if( isset($agreementResponse['dealerId']) && !empty($agreementResponse['dealerId']) ) {
+					$dealerId = $agreementResponse['dealerId'];
 				}
 
 				// Contact Name
@@ -620,7 +619,7 @@
 			
 				<div class="row collapseBodyChatInfo">
 					
-						<input type="hidden" value="<?php echo count($salesPersonArr); ?>" id="salesPersonCount" />
+						<input type="hidden" value="<?php echo count($salesPersonArr) == 0 ? 1 : count($salesPersonArr); ?>" id="salesPersonCount" />
 						<?php 
 							if( count($salesPersonArr) > 0 ) {
 
@@ -628,8 +627,8 @@
 						?>
 									<div class="salespersonDiv">
 										<div class="input-field col width20 offset-s3">
-											<input id="Salesperson" type="text" class="inputField dataInput formElement Salesperson Salesperson_<?php echo $key+1; ?>" autocomplete="off" value="<?php echo $value['salesPersonName']; ?>" >
-											<label for="Salesperson" data-msg="">Salesperson</label>
+											<input id="Salesperson_<?php echo $key+1; ?>" type="text" class="inputField dataInput formElement Salesperson Salesperson_<?php echo $key+1; ?>" autocomplete="off" value="<?php echo $value['salesPersonName']; ?>" >
+											<label for="Salesperson_<?php echo $key+1; ?>" data-msg="">Salesperson</label>
 											<div class="fieldErrorMsg" data-frmid=""></div>
 
 											<!--<div class="anotherSalespersonContainer">
@@ -637,18 +636,18 @@
 											<!--<a class="addAnotherBtn" id="addAnotherSalespersonBtn">Add another</a>-->
 										</div>
 										<div class="input-field cold width20 padding">
-											<input id="LeadEmail" type="text" class="inputField dataInput formElement leadsEmails leadsEmails_<?php echo $key+1; ?>" data-fid="dealershipLeadEmail" autocomplete="off" value="<?php echo $value['salesLeadEmail']; ?>">
-											<label for="LeadEmail" class="active">Email</label>
-											<div class="fieldErrorMsg" data-frmid="LeadEmail"></div>
+											<input id="LeadEmail_<?php echo $key+1; ?>" type="text" class="inputField dataInput formElement leadsEmails leadsEmails_<?php echo $key+1; ?>" data-fid="dealershipLeadEmail" autocomplete="off" value="<?php echo $value['salesLeadEmail']; ?>">
+											<label for="LeadEmail_<?php echo $key+1; ?>" class="active">Email</label>
+											<div class="fieldErrorMsg" data-frmid="LeadEmail_<?php echo $key+1; ?>"></div>
 
 										<!-- <div class="anotherLeadEmailContainer">
 											</div>
 											<a class="addAnotherBtn" id="addAnotherLeadEmailBtn">Add another</a>-->
 										</div>
 										<div class="input-field cold width20 padding">
-											<input id="leadMobileNumber" type="text" class="inputField dataInput formElement phoneNumberMask leadMobileNumber leadMobileNumber_<?php echo $key+1; ?>" autocomplete="off" value="<?php echo $value['salesPhoneNumber']; ?>">
-											<label for="leadMobileNumber" data-msg="">Mobile number  </label>
-											<div class="fieldErrorMsg" data-frmid="leadMobileNumber"></div>
+											<input id="leadMobileNumber_<?php echo $key+1; ?>" type="text" class="inputField dataInput formElement phoneNumberMask leadMobileNumber leadMobileNumber_<?php echo $key+1; ?>" autocomplete="off" value="<?php echo $value['salesPhoneNumber']; ?>">
+											<label for="leadMobileNumber_<?php echo $key+1; ?>" data-msg="">Mobile number  </label>
+											<div class="fieldErrorMsg" data-frmid="leadMobileNumber_<?php echo $key+1; ?>"></div>
 
 										<!--  <div class="anotherleadMobileNumberContainer">
 											</div>
@@ -663,8 +662,8 @@
 						?>
 
 								<div class="input-field col width20 offset-s3">
-									<input id="Salesperson" type="text" class="inputField dataInput formElement Salesperson Salesperson_0" autocomplete="off">
-									<label for="Salesperson" data-msg="">Salesperson</label>
+									<input id="Salesperson_1" type="text" class="inputField dataInput formElement Salesperson Salesperson_1" autocomplete="off">
+									<label for="Salesperson_1" data-msg="">Salesperson</label>
 									<div class="fieldErrorMsg" data-frmid=""></div>
 
 									<!--<div class="anotherSalespersonContainer">
@@ -672,18 +671,18 @@
 									<!--<a class="addAnotherBtn" id="addAnotherSalespersonBtn">Add another</a>-->
 								</div>
 								<div class="input-field cold width20 padding">
-									<input id="LeadEmail" type="text" class="inputField dataInput formElement leadsEmails leadsEmails_0" data-fid="dealershipLeadEmail" autocomplete="off">
-									<label for="LeadEmail" class="active">Email</label>
-									<div class="fieldErrorMsg" data-frmid="LeadEmail"></div>
+									<input id="LeadEmail_1" type="text" class="inputField dataInput formElement leadsEmails leadsEmails_1" data-fid="dealershipLeadEmail" autocomplete="off">
+									<label for="LeadEmail_1" class="active">Email</label>
+									<div class="fieldErrorMsg" data-frmid="LeadEmail_1"></div>
 
 								<!-- <div class="anotherLeadEmailContainer">
 									</div>
 									<a class="addAnotherBtn" id="addAnotherLeadEmailBtn">Add another</a>-->
 								</div>
 								<div class="input-field cold width20 padding">
-									<input id="leadMobileNumber" type="text" class="inputField dataInput formElement phoneNumberMask leadMobileNumber leadMobileNumber_0" autocomplete="off">
-									<label for="leadMobileNumber" data-msg="">Mobile number  </label>
-									<div class="fieldErrorMsg" data-frmid="leadMobileNumber"></div>
+									<input id="leadMobileNumber_1" type="text" class="inputField dataInput formElement phoneNumberMask leadMobileNumber leadMobileNumber_1" autocomplete="off">
+									<label for="leadMobileNumber_1" data-msg="">Mobile number  </label>
+									<div class="fieldErrorMsg" data-frmid="leadMobileNumber_1"></div>
 
 								<!--  <div class="anotherleadMobileNumberContainer">
 									</div>
@@ -732,7 +731,7 @@
 
 				<div class="row collapseBodyCraigslistInfo" id="areaSubAreDiv" >
 
-					<input id="marketDetailsCount" type="hidden" value="<?php echo count($craigslistAreas) ?>" />
+					<input id="marketDetailsCount" type="hidden" value="<?php echo count($craigslistAreas) == 0 ? 1 : count($craigslistAreas); ?>" />
 
 						<?php 
 						
@@ -788,15 +787,15 @@
 							<div id="marketDiv_0" class="row">
 								<div class="col width30 offset-s3 mntop">
 									<h5>Craigslist Area</h5>
-									<select class="select-wrapper input.select-dropdown form-control-chosen" id="cragislistAreas_0" name="cragislistAreas_0" rel="0" >
+									<select class="select-wrapper input.select-dropdown form-control-chosen" id="cragislistAreas_1" name="cragislistAreas_1" rel="1" >
 										<?php echo $areaHtml; ?>
 									</select>
-									<div class="fieldErrorMsg areaErr area_err_0">Information required to add more</div>
+									<div class="fieldErrorMsg areaErr area_err_1">Information required to add more</div>
 								</div>
 
 								<div class="col width30 padding">
 									<h5>Craigslist Sub-Area</h5>
-									<select class="select-wrapper input.select-dropdown" id="cragislistSubAreas_0" name="cragislistSubAreas_0" rel="0" >
+									<select class="select-wrapper input.select-dropdown" id="cragislistSubAreas_1" name="cragislistSubAreas_1" rel="1" >
 									</select>
 								</div>
 							</div>
@@ -877,7 +876,7 @@
 				</div>
 				<div class="row collapseBodyWebsiteInfo" id="websiteUrlContainer">
 
-					<input id="websiteHostURLDetailsCount" type="hidden" value="<?php echo count($dealerMultiWebSiteUrlsArr); ?>" />
+					<input id="websiteHostURLDetailsCount" type="hidden" value="<?php echo count($dealerMultiWebSiteUrlsArr) == 0 ? 1 : count($dealerMultiWebSiteUrlsArr); ?>" />
 					<?php 
 
 						if( count($dealerMultiWebSiteUrlsArr) > 0 ) {

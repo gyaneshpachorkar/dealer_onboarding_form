@@ -214,6 +214,7 @@ pageElement = {}, pageData = {};
                             '<div class="fieldErrorMsg" data-frmid="leadMobileNumber_'+ k +'"></div></div></div></div><div style="clear:both"></div>';
 	
 		$('.leadeSalesEmailNumContainer').append(htmlMarkup);
+		$('#salesPersonCount').val(k);
 		initMaskForPhoneNumberFields();
     });
 	
