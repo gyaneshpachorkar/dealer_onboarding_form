@@ -304,7 +304,7 @@
 				if( isset( $agreementResponse['chat_sales_users'] ) && !empty($agreementResponse['chat_sales_users']) ) {
 
 					$salesPersons = json_decode($agreementResponse['chat_sales_users'], true);
-					if( is_array($areasCra) ) {
+					if( is_array($salesPersons) ) {
 						$salesPersonArr = $salesPersons;
 					}
 					
@@ -314,7 +314,7 @@
 				if( isset( $agreementResponse['dealer_website_url'] ) && !empty($agreementResponse['dealer_website_url']) ) {
 
 					$dealerMultiWebSiteUrls = json_decode($agreementResponse['dealer_website_url'], true);
-					if( is_array($areasCra) ) {
+					if( is_array($dealerMultiWebSiteUrls) ) {
 						$dealerMultiWebSiteUrlsArr = $dealerMultiWebSiteUrls;
 					}
 					
