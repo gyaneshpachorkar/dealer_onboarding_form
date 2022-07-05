@@ -625,7 +625,8 @@
 
 								foreach( $salesPersonArr as $key => $value ) {
 						?>
-									<div class="salespersonDiv">
+									<div class="salespersonDiv" id="SEM_<?php echo $key+1; ?>">
+										
 										<div class="input-field col width20 offset-s3">
 											<input id="Salesperson_<?php echo $key+1; ?>" type="text" class="inputField dataInput formElement Salesperson Salesperson_<?php echo $key+1; ?>" autocomplete="off" value="<?php echo $value['salesPersonName']; ?>" >
 											<label for="Salesperson_<?php echo $key+1; ?>" data-msg="">Salesperson</label>
@@ -647,13 +648,17 @@
 										<div class="input-field cold width20 padding">
 											<input id="leadMobileNumber_<?php echo $key+1; ?>" type="text" class="inputField dataInput formElement phoneNumberMask leadMobileNumber leadMobileNumber_<?php echo $key+1; ?>" autocomplete="off" value="<?php echo $value['salesPhoneNumber']; ?>">
 											<label for="leadMobileNumber_<?php echo $key+1; ?>" data-msg="">Mobile number  </label>
+											<?php if( $key != 0 ) { ?>
+												<a href="#dlt" class="closeBtnForAnotherLink1" onclick="remove('SEM_<?php echo $key+1; ?>', 'salesPersonCount')">x</a>
+											<?php } ?>
 											<div class="fieldErrorMsg" data-frmid="leadMobileNumber_<?php echo $key+1; ?>"></div>
 
 										<!--  <div class="anotherleadMobileNumberContainer">
 											</div>
 										<a class="addAnotherBtn" id="addAnotherleadMobileNumberBtn">Add another</a>-->
 										</div> 
-									</div>
+									
+								</div>
 
 						<?php
 								}
@@ -776,6 +781,13 @@
 
 										</select>
 									</div>
+									
+									<?php if( $key != 0 ) { ?>
+										<div class="col">
+											<a href="#dlt" onclick="remove('marketDiv_<?php echo $key+1; ?>', 'marketDetailsCount')">X</a>
+										</div>
+									<?php } ?>
+
 								</div>
 
 						<?php
@@ -784,7 +796,7 @@
 						
 						?>
 						
-							<div id="marketDiv_0" class="row">
+							<div id="marketDiv_1" class="row">
 								<div class="col width30 offset-s3 mntop">
 									<h5>Craigslist Area</h5>
 									<select class="select-wrapper input.select-dropdown form-control-chosen" id="cragislistAreas_1" name="cragislistAreas_1" rel="1" >
@@ -891,7 +903,12 @@
 										<label for="dealerWebsiteURL_<?php echo $key+1; ?>" data-msg="">Dealer Website URL</label>
 										<div class="fieldErrorMsg" data-frmid="dealerWebsiteURL_<?php echo $key+1; ?>"></div>
 									
-									</div>				
+									</div>
+									<?php if( $key != 0 ) { ?>
+										<div class="col">
+											<a href="#dlt" onclick="remove('websiteHostURL_<?php echo $key+1; ?>', 'websiteHostURLDetailsCount')">X</a>
+										</div>
+									<?php } ?>
 
 								</div>
 					<?php

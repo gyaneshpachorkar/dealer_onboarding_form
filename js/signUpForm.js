@@ -15,12 +15,12 @@ pageElement = {}, pageData = {};
     //$('.InventorytoPostField').prop('checked', false);
 	//$('#does-not-use-CRM').prop('checked', false);
     pageElement.signUpForm.signUpDealershipBttn.click(function(){
-        sendRequestForSignUpDealership();
+        sendRequestForSignUpDealership( 0 );
         //window.location.reload;
     });
 
     pageElement.signUpForm.saveDraftBtn.click(function(){
-        sendRequestForSignUpDealership();
+        sendRequestForSignUpDealership( 1 );
         //window.location.reload;
     });
     
@@ -210,7 +210,7 @@ pageElement = {}, pageData = {};
 		
 		htmlMarkup+= '<div class="input-field cold width20 padding"><input id="leadMobileNumber_'+ k +'" type="text" class="inputField dataInput formElement phoneNumberMask leadMobileNumber leadMobileNumber_'+k+'" data-fid="leadMobileNumber">'+
                             '<label for="leadMobileNumber_'+ k +'" data-msg="Another Mobile Number.">&nbsp;</label>'+
-                            '<a href="#dlt" class="closeBtnForAnotherLink1" onclick="remove(\'SEM_'+k+'\')">x</a>'+
+                            '<a href="#dlt" class="closeBtnForAnotherLink1" onclick="remove(\'SEM_'+k+'\', \'salesPersonCount\')">x</a>'+
                             '<div class="fieldErrorMsg" data-frmid="leadMobileNumber_'+ k +'"></div></div></div></div><div style="clear:both"></div>';
 	
 		$('.leadeSalesEmailNumContainer').append(htmlMarkup);
@@ -241,7 +241,7 @@ pageElement = {}, pageData = {};
 								</select>\
 							</div>\
 							<div class="col">\
-								<a href="#dlt" onclick="remove(\'marketDiv_'+count+'\')">X</a>\
+								<a href="#dlt" onclick="remove(\'marketDiv_'+count+'\', \'marketDetailsCount\')">X</a>\
 							</div>\
 						</div>';
 		
@@ -271,7 +271,7 @@ pageElement = {}, pageData = {};
 							<div class="fieldErrorMsg" data-frmid="dealerWebsiteURL_'+count+'"></div>\
 						</div>\
 						<div class="col">\
-							<a href="#dlt" onclick="remove(\'websiteHostURL_'+count+'\')">X</a>\
+							<a href="#dlt" onclick="remove(\'websiteHostURL_'+count+'\', \'websiteHostURLDetailsCount\')">X</a>\
 						</div>\
 					</div>';
 	
@@ -643,11 +643,11 @@ function initSelectors(){
     pageElement.signUpForm.addAnotherAdditionalEmailBtn = $('#addAnotherAdditionalEmailBtn');
 }
 
-function sendRequestForSignUpDealership(){
+function sendRequestForSignUpDealership( isDraft = 0 ){
 
     pageElement.signUpForm.form.find('.fieldErrorMsg').html('').hide();
 
-    if(!validateFormData()){
+    if(!validateFormData(isDraft)){
         return false;
     }
 
@@ -1002,22 +1002,22 @@ function resetForm(){
 }
 
 
-function validateFormData(){
+function validateFormData( isDraft = 0 ){
     var isValFailed = false,
 	errField = pageElement.signUpForm.form.find('.fieldErrorMsg'), isScrollPointFound = false;
     
 
-    if($('#dealershipInfomationName').val().length == 0){
+    if($('#dealershipInfomationName').val().length == 0 && isDraft == 0){
         errField.filter('[data-frmid="dealershipInfomationName"]').show().html('Information required to continue');
         isValFailed = true;
     }
 	
-	if( $('#dealershipInformationContactPhone').length > 0 && $('#dealershipInformationContactPhone').val().length == 0){
+	if( $('#dealershipInformationContactPhone').length > 0 && $('#dealershipInformationContactPhone').val().length == 0  && isDraft == 0 ){
         errField.filter('[data-frmid="dealershipInformationContactPhone"]').show().html('Information required to continue');
         isValFailed = true;
     }
 	
-	if( $('#dealershipInformationContactAddress').length > 0 && $('#dealershipInformationContactAddress').val().length == 0 ) {
+	if( $('#dealershipInformationContactAddress').length > 0 && $('#dealershipInformationContactAddress').val().length == 0  && isDraft == 0 ) {
 		
 		errField.filter('[data-frmid="dealershipInformationContactAddress"]').show().html('Information required to continue');
         isValFailed = true;
@@ -1035,7 +1035,7 @@ function validateFormData(){
         }
     });*/
    
-   if( $('#dealershipName').length > 0 &&  $('#dealershipName').val().length == 0){
+   if( $('#dealershipName').length > 0 &&  $('#dealershipName').val().length == 0  && isDraft == 0){
         errField.filter('[data-frmid="dealershipName"]').show().html('Information required to continue');
         isValFailed = true;
     }
@@ -1046,21 +1046,21 @@ function validateFormData(){
 				//$('.conditionalRequire').addClass('hide');
 				isValFailed = false; 
 		}else{
-			if($('#CRMEmail').val().length > 0){
+			if($('#CRMEmail').val().length > 0 && isDraft == 0 ){
 				if(!validateEmail($('#CRMEmail').val())){
 					errField.filter('[data-frmid="CRM-email-address"]').show().html('Invalid email format, email format should be simple@example.com');
 					isValFailed = true;
 				}
 			}
 			
-			if($('#CRMEmail').val().length == 0){
+			if($('#CRMEmail').val().length == 0 && isDraft == 0){
 				errField.filter('[data-frmid="CRM-email-address"]').show().html('Information required to continue');
-			isValFailed = true;
+			    isValFailed = true;
 			}
 			
-			if($('#CRM_User_Name').val().length == 0){
+			if($('#CRM_User_Name').val().length == 0 && isDraft == 0){
 				errField.filter('[data-frmid="CRM_User_Name"]').show().html('Information required to continue');
-			isValFailed = true;
+			    isValFailed = true;
 			}
 		}
 	}
@@ -1073,7 +1073,16 @@ function validateFormData(){
 	        }
 	    }
     }
-	if( $('#dealershipContactPhone').length > 0 && $('#dealershipContactPhone').val().length == 0){
+
+    if( $('#dealershipInformationContactPhone').val().length && $('#dealershipInformationContactPhone').val() != null){
+	    if($('#dealershipInformationContactPhone').val().length > 0){
+	        if(!validatePhoneNumber($('#dealershipInformationContactPhone').val())){
+	            errField.filter('[data-frmid="dealershipInformationContactPhone"]').show().html('Invalid phone number');
+	            isValFailed = true;            
+	        }
+	    }
+    }
+	if( $('#dealershipContactPhone').length > 0 && $('#dealershipContactPhone').val().length == 0 && isDraft == 0){
         errField.filter('[data-frmid="dealershipContactPhone"]').show().html('Information required to continue');
         isValFailed = true;
     }
@@ -1085,11 +1094,11 @@ function validateFormData(){
 	        }
 	    }
     }
-    if( $('#billingContactPhone').length > 0 && $('#billingContactPhone').val().length == 0){
+    if( $('#billingContactPhone').length > 0 && $('#billingContactPhone').val().length == 0 && isDraft == 0){
         errField.filter('[data-frmid="billing-phoneNumber"]').show().html('Information required to continue');
         isValFailed = true;
     }
-	if( $('#dealershipContactEmail').length > 0 && $('#dealershipContactEmail').val().length == 0){
+	if( $('#dealershipContactEmail').length > 0 && $('#dealershipContactEmail').val().length == 0 && isDraft == 0){
         errField.filter('[data-frmid="dealershipContactEmail"]').show().html('Information required to continue');
         isValFailed = true;
     }
@@ -1108,17 +1117,12 @@ function validateFormData(){
 		});
 	}
 	
-	if( $('#billingName').length > 0 && $('#billingName').val().length == 0){
+	if( $('#billingName').length > 0 && $('#billingName').val().length == 0 && isDraft == 0 ){
         errField.filter('[data-frmid="billing-fullName"]').show().html('Information required to continue');
         isValFailed = true;
     }
 	
-	if( $('#billingContactPhone').length > 0 && $('#billingContactPhone').val().length == 0){
-        errField.filter('[data-frmid="billing-phoneNumber"]').show().html('Information required to continue');
-        isValFailed = true;
-    }
-	
-	if( $('#billingContactPhone').length > 0){	
+	if( $('#billingContactEmail').length > 0){	
 	
 		$('#billingContactEmail').each(function(){
 			var self = $(this);
@@ -1132,11 +1136,10 @@ function validateFormData(){
 		});
 	}
 	
-	if( $('#billingContactEmail').length > 0 && $('#billingContactEmail').val().length == 0){
+	if( $('#billingContactEmail').length > 0 && $('#billingContactEmail').val().length == 0 && isDraft == 0){
         errField.filter('[data-frmid="billingContactEmail"]').show().html('Information required to continue');
         isValFailed = true;
     }
-	
 	
 	
 	if( $('#additionalEmailAddress').length && $('#additionalEmailAddress').val().length > 0){
@@ -1236,7 +1239,7 @@ function validateFormData(){
 			var receivingNumberAdditionalButton = document.getElementById('leadMobileNumber_'+[i]);
 			if(receivingNumberAdditionalButton){
 				var receivingNumberAdditionalButtonValue = document.getElementById('leadMobileNumber_'+[i]).value.length;	
-				if(receivingNumberAdditionalButtonValue == 0 ){
+				if(receivingNumberAdditionalButtonValue == 0 && isDraft == 0 ){
 					errField.filter('[data-frmid="leadMobileNumber_'+[i]+'"]').show().html('Information required to continue');
 					isValFailed = true;
 				}
@@ -1379,10 +1382,23 @@ function unblockPage() {
     $.unblockUI();
 	
 }
-function remove(divId) {
+function remove(divId, countId) {
 	
    // console.log(divId);
 	$('#'+divId).remove();
+
+    var count = 0;
+    console.log( countId, $('#'+countId), $('#'+countId).length );
+    if( $('#'+countId).length > 0 ) {
+        let number = isNaN( $('#'+countId).val() ) ? 0 : parseInt( $('#'+countId).val() );
+
+        if( number != 0 ) {
+            count = number-1;
+        }
+
+    }
+
+    $('#'+countId).val( count );
 }
 
 function getBlockUIStyleObject() {
