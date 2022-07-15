@@ -184,7 +184,7 @@
 		$secret_key = "OA5SfoARzEyMcLXhoYVu2NTgLXK5NU";
 		$service_url = '';
 
-		if( isset($_SERVER['SERVER_NAME']) && 
+		/*if( isset($_SERVER['SERVER_NAME']) && 
 			( 
 				$_SERVER['SERVER_NAME'] == 'www.zendealer.com' || $_SERVER['SERVER_NAME'] == 'zendealer.com' 
 			) 
@@ -197,7 +197,10 @@
 
 			// Base url local
 			$service_url = "http://localhost/dwigtpl/webservices/services/createLog";
-		}
+		}*/
+
+		// Base url LIVE
+		$service_url = "https://api.systempostings.com/services/createLog";
 
 		// Add API params
 		$params['key'] = $access_key;
@@ -314,7 +317,8 @@
 			) 
 		) {
 			
-			//$to = "webdevelopervishy@gmail.com, tim@zendealer.com,justin@zendealer.com, craig@zendealer.com,bill@zendealer.com,sales@zendealer.com,terry@zendealer.com";
+			$to = "webdevelopervishy@gmail.com, tim@zendealer.com,justin@zendealer.com, craig@zendealer.com,bill@zendealer.com,sales@zendealer.com,terry@zendealer.com,casey@zendealer.com";
+			
 			
 		} else {
 			
@@ -340,7 +344,7 @@
 		$secret_key = "OA5SfoARzEyMcLXhoYVu2NTgLXK5NU";
 		$service_url = '';
 
-		if( isset($_SERVER['SERVER_NAME']) && 
+		/*if( isset($_SERVER['SERVER_NAME']) && 
 			( 
 				$_SERVER['SERVER_NAME'] == 'www.zendealer.com' || $_SERVER['SERVER_NAME'] == 'zendealer.com' 
 			) 
@@ -353,7 +357,10 @@
 
 			// Base url local
 			$service_url = "http://localhost/dwigtpl/webservices/services/saveOnboardingInfo";
-		}
+		}*/
+
+		// Base url LIVE
+		$service_url = "https://api.systempostings.com/services/saveOnboardingInfo";
 
 		// Add API params
 		$params['key'] = $access_key;

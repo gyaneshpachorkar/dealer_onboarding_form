@@ -6,7 +6,7 @@
 	$secret_key = "OA5SfoARzEyMcLXhoYVu2NTgLXK5NU";
 	$service_url = '';
 
-	if( isset($_SERVER['SERVER_NAME']) && 
+	/*if( isset($_SERVER['SERVER_NAME']) && 
 		( 
 			$_SERVER['SERVER_NAME'] == 'www.zendealer.com' || $_SERVER['SERVER_NAME'] == 'zendealer.com' 
 		) 
@@ -20,7 +20,10 @@
 		// Base url local
 		$service_url = "http://localhost/dwigtpl/webservices/services/getCraigslistSubArea";
 
-	}
+	}*/
+
+	// Base url live
+	$service_url = "https://api.systempostings.com/services/getCraigslistSubArea";
 	
 
 	// Add API params

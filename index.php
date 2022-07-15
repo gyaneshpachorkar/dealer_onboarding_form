@@ -26,7 +26,7 @@
 
 		$service_url ='';
 		
-		if( isset($_SERVER['SERVER_NAME']) && 
+		/*if( isset($_SERVER['SERVER_NAME']) && 
 			( 
 				$_SERVER['SERVER_NAME'] == 'www.zendealer.com' || $_SERVER['SERVER_NAME'] == 'zendealer.com' 
 			) 
@@ -39,7 +39,10 @@
 	
 			// Base url local
 			$service_url = "http://localhost/dwigtpl/webservices/services/getCraigslistArea";
-		}
+		}*/
+
+		// Base url LIVE
+		$service_url = "https://api.systempostings.com/services/getCraigslistArea";
 
 		// Add API params
 		$parameters['key'] = $access_key;
@@ -100,7 +103,7 @@
 
 		$service_url = '';
 		
-		if( isset($_SERVER['SERVER_NAME']) && 
+		/*if( isset($_SERVER['SERVER_NAME']) && 
 			( 
 				$_SERVER['SERVER_NAME'] == 'www.zendealer.com' || $_SERVER['SERVER_NAME'] == 'zendealer.com' 
 			) 
@@ -113,7 +116,10 @@
 	
 			// Base url local
 			$service_url = "http://localhost/dwigtpl/webservices/services/getAgreementDetail";
-		}
+		}*/
+
+		// Base url LIVE
+		$service_url = "https://api.systempostings.com/services/getAgreementDetail";
 		
 		// Add API params
 		$params['key'] = $access_key;
@@ -665,35 +671,37 @@
 
 							} else {
 						?>
+								<div class="salespersonDiv">
+								
+									<div class="input-field col width20 offset-s3">
+										<input id="Salesperson_1" type="text" class="inputField dataInput formElement Salesperson Salesperson_1" autocomplete="off">
+										<label for="Salesperson_1" data-msg="">Salesperson</label>
+										<div class="fieldErrorMsg" data-frmid=""></div>
 
-								<div class="input-field col width20 offset-s3">
-									<input id="Salesperson_1" type="text" class="inputField dataInput formElement Salesperson Salesperson_1" autocomplete="off">
-									<label for="Salesperson_1" data-msg="">Salesperson</label>
-									<div class="fieldErrorMsg" data-frmid=""></div>
-
-									<!--<div class="anotherSalespersonContainer">
-									</div>-->
-									<!--<a class="addAnotherBtn" id="addAnotherSalespersonBtn">Add another</a>-->
-								</div>
-								<div class="input-field cold width20 padding">
-									<input id="LeadEmail_1" type="text" class="inputField dataInput formElement leadsEmails leadsEmails_1" data-fid="dealershipLeadEmail" autocomplete="off">
-									<label for="LeadEmail_1" class="active">Email</label>
-									<div class="fieldErrorMsg" data-frmid="LeadEmail_1"></div>
-
-								<!-- <div class="anotherLeadEmailContainer">
+										<!--<div class="anotherSalespersonContainer">
+										</div>-->
+										<!--<a class="addAnotherBtn" id="addAnotherSalespersonBtn">Add another</a>-->
 									</div>
-									<a class="addAnotherBtn" id="addAnotherLeadEmailBtn">Add another</a>-->
-								</div>
-								<div class="input-field cold width20 padding">
-									<input id="leadMobileNumber_1" type="text" class="inputField dataInput formElement phoneNumberMask leadMobileNumber leadMobileNumber_1" autocomplete="off">
-									<label for="leadMobileNumber_1" data-msg="">Mobile number  </label>
-									<div class="fieldErrorMsg" data-frmid="leadMobileNumber_1"></div>
+									<div class="input-field cold width20 padding">
+										<input id="LeadEmail_1" type="text" class="inputField dataInput formElement leadsEmails leadsEmails_1" data-fid="dealershipLeadEmail" autocomplete="off">
+										<label for="LeadEmail_1" class="active">Email</label>
+										<div class="fieldErrorMsg" data-frmid="LeadEmail_1"></div>
 
-								<!--  <div class="anotherleadMobileNumberContainer">
+									<!-- <div class="anotherLeadEmailContainer">
+										</div>
+										<a class="addAnotherBtn" id="addAnotherLeadEmailBtn">Add another</a>-->
 									</div>
-								<a class="addAnotherBtn" id="addAnotherleadMobileNumberBtn">Add another</a>-->
-								</div> 
-						<?php
+									<div class="input-field cold width20 padding">
+										<input id="leadMobileNumber_1" type="text" class="inputField dataInput formElement phoneNumberMask leadMobileNumber leadMobileNumber_1" autocomplete="off">
+										<label for="leadMobileNumber_1" data-msg="">Mobile number  </label>
+										<div class="fieldErrorMsg" data-frmid="leadMobileNumber_1"></div>
+
+										<!--  <div class="anotherleadMobileNumberContainer">
+											</div>
+										<a class="addAnotherBtn" id="addAnotherleadMobileNumberBtn">Add another</a>-->
+									</div> 
+								</div>
+							<?php
 
 							}
 						
